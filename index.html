@@ -1,95 +1,28 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ثغور الأندلس - المحرك الأساسي</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ثغور الأندلس - الاستراتيجية الإسلامية</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; user-select: none; }
-        body { background: #0f172a; color: #f8fafc; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
-        header { background: #1e293b; padding: 12px 16px; border-bottom: 1px solid #334155; text-align: center; font-weight: bold; font-size: 1.1rem; color: #f59e0b; }
-        .resources { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 12px; background: #1e293b; margin: 8px; border-radius: 8px; border: 1px solid #334155; }
-        .res-card { background: #0f172a; padding: 8px; border-radius: 6px; text-align: center; }
-        .res-name { font-size: 0.75rem; color: #94a3b8; margin-bottom: 4px; }
-        .res-val { font-size: 1rem; font-weight: bold; color: #10b981; }
-        .actions { flex: 1; padding: 12px; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; }
-        .btn { background: #2563eb; color: #fff; border: none; padding: 14px; border-radius: 8px; font-size: 0.95rem; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-        .btn:active { background: #1d4ed8; transform: scale(0.98); }
-        .btn-gold { background: #d97706; }
-        .btn-gold:active { background: #b45309; }
-        .log { height: 120px; background: #020617; border-top: 1px solid #334155; padding: 10px; font-size: 0.8rem; color: #64748b; overflow-y: auto; }
-        .log-p { margin-bottom: 4px; color: #38bdf8; }
-    </style>
-</head>
-<body>
-
-    <header>🏰 ثغور الأندلس - الإدارة العسكرية</header>
-
-    <div class="resources">
-        <div class="res-card"><div class="res-name">الذهب</div><div class="res-val" id="gold">100</div></div>
-        <div class="res-card"><div class="res-name">الإمدادات</div><div class="res-val" id="food">200</div></div>
-        <div class="res-card"><div class="res-name">الحامية</div><div class="res-val" id="troops">50</div></div>
-    </div>
-
-    <div class="actions">
-        <button class="btn btn-gold" onclick="collectTax()">
-            <span>جباية الخراج (+20 ذهب)</span>
-            <span>جاهز</span>
-        </button>
-        <button class="btn" onclick="trainTroops()">
-            <span>تجنيد فرسان (-30 ذهب)</span>
-            <span>+5 فرسان</span>
-        </button>
-    </div>
-
-    <div class="log" id="logBox">
-        <div class="log-p">> تم إطلاق المحرك النظيف بنجاح. الثغور تحت الإدارة.</div>
-    </div>
-
-    <script>
-        let state = {
-            gold: parseInt(localStorage.getItem('andalus_gold')) || 100,
-            food: parseInt(localStorage.getItem('andalus_food')) || 200,
-            troops: parseInt(localStorage.getItem('andalus_troops')) || 50
-        };
-
-        function updateUI() {
-            document.getElementById('gold').innerText = state.gold;
-            document.getElementById('food').innerText = state.food;
-            document.getElementById('troops').innerText = state.troops;
-            localStorage.setItem('andalus_gold', state.gold);
-            localStorage.setItem('andalus_food', state.food);
-            localStorage.setItem('andalus_troops', state.troops);
+        :root {
+            --bg-dark: #121824;
+            --panel-bg: #1e293b;
+            --gold: #d4af37;
+            --gold-light: #f3e5ab;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --accent: #2e7d32;
         }
-
-        function addLog(msg) {
-            const box = document.getElementById('logBox');
-            const p = document.createElement('div');
-            p.className = 'log-p';
-            p.innerText = `> ${new Date().toLocaleTimeString('ar-EG')} - ${msg}`;
-            box.appendChild(p);
-            box.scrollTop = box.scrollHeight;
-        }
-
-        function collectTax() {
-            state.gold += 20;
-            updateUI();
-            addLog("تم جمع الخراج واكتساب 20 قطعة ذهبية.");
-        }
-
-        function trainTroops() {
-            if (state.gold >= 30) {
-                state.gold -= 30;
-                state.troops += 5;
-                updateUI();
-                addLog("تم تجنيد 5 فرسان لتعزيز حامية الثغور.");
-            } else {
-                addLog("الذهب غير كافٍ لعملية التجنيد!");
-            }
-        }
-
-        updateUI();
-    </script>
-</body>
-</html>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: Tahoma, sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; }
+        header { background: var(--panel-bg); border-bottom: 2px solid var(--gold); padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; }
+        h1 { font-size: 1.2rem; color: var(--gold); }
+        .resources-bar { display: flex; gap: 15px; font-size: 0.9rem; background: rgba(0,0,0,0.3); padding: 5px 10px; border-radius: 5px; border: 1px solid var(--border); }
+        .res-item { display: flex; align-items: center; gap: 4px; }
+        main { flex: 1; padding: 15px; max-width: 600px; margin: 0 auto; width: 100%; padding-bottom: 70px; }
+        .section { display: none; }
+        .section.active { display: block; }
+        .card { background: var(--panel-bg); border: 1px solid var(--border); border-radius: 8px; padding: 15px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+        .card h2 { font-size: 1.1rem; color: var(--gold-light); margin-bottom
